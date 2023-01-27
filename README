@@ -1,0 +1,23 @@
+Name: Haitian Zhou; Pennkey: haitian 
+Github Username: Haitian0310
+Submitted Files: README.txt  penn-shredder.c 
+Work Overview and Code Description:
+
+    //I will just take the no kill function as example
+    At the very beginning of my main function, I initialized strings user_command and user_args and integer timeout. 
+    Line 78-89 is checking user has entered the valid input and ill error out if user enter a negative number or enter more than one arguments.
+    Then enter the while loop. Write the prompt and read user input.
+    Line 97-100 is to make sure that string cmd is empty in case it still remembers the last user input.
+    Line 101-109 is to handle the CTRL-D command. 
+    Line 111-118 reads the user input and calls the "trimwhitespace" function to remove the white space at the front and in the middle of user command and arguments.
+    Line 119-121 is to handle the empty input. If read empty, reprompt.
+    Line 123-129 slices out the user_command while line 130-139 slices out the user_args.
+    Line 141-143 is to make sure that if user_args is empty, args[1] should be NULL so that /bin/cat and /bin/ls would function properly.
+    Then use fork() to create child function. 
+        inside the child function, to avoid using kill(), I user sig_dfl to use the setting of alarm() to kill the child function when timeout. if error, prompt the user_command and error message.
+        inside the parent function, first register the sig_handler with corresponding alarm_handler and sigint_handler to prompting the timeout message and block CTRL C. Then use wait() to wait child function to finish.
+    After the while loop, reset the alarm and status. 
+
+Thanks for all TA's help for me to complete this project. 
+
+
